@@ -39,7 +39,7 @@
             $msgClass = 'alert-danger';   
           } else {
               #Sending the email
-                $toEmail = 'bdonaldson58@gmail.com';
+                $to = 'bdonaldson58@gmail.com';
                 $subject = 'Contact Request From '.$firstname;
                 $body = '<h2>Contact Request</h2>
                         <h4>First Name</h4><p> '.$firstname.'</p>
@@ -56,10 +56,18 @@
                 # Additional Headers
                 $headers .= "From: " .$firstname. "<".$email.">". "\r\n";
 
-                if(mail($toEmail, $subject, $body, $headers)){
+                if(mail($to, $subject, $body, $headers)){
                 # Email sent
                     $msg = 'Your email has been sent';
                     $msgClass = 'alert-success';
+
+                # Clear form after it has been sent
+                    $firstname = '';
+                    $lastname = '';
+                    $phone = '';
+                    $email = '';
+                    $message = '';
+                    
                 } else {
                     # Email sent
                     $msg = 'Your email was not sent';
@@ -69,7 +77,7 @@
         } else {
             //Failed
             $msg = 'Please fill in all fields';
-            $msgclass = 'alert-danger';
+            $msgClass = 'alert-danger';
         }      
     }
 
